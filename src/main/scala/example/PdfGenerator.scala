@@ -14,7 +14,7 @@ import play.api.libs.json._
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
-class Hello {
+class PdfGenerator {
 
   def exec(is: InputStream, os: OutputStream): Unit = {
 
@@ -48,8 +48,8 @@ class Hello {
     def store(pdf: Array[Byte]) : Unit = {
       val s3Client = new AmazonS3Client(new EnvironmentVariableCredentialsProvider())
       val metadata: ObjectMetadata = new ObjectMetadata()
-      metadata.addUserMetadata("email", "eric.wu@myob.com")
-      s3Client.putObject("myob-hackday1", "invoice.pdf", new ByteArrayInputStream(pdf), metadata)
+      metadata.addUserMetadata("email", "eric.wu.sh@gmail.com")
+      s3Client.putObject("myob-hackday1", "invoices/invoice.pdf", new ByteArrayInputStream(pdf), metadata)
     }
 
   }
