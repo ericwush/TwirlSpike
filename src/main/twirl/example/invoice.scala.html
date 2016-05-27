@@ -1,4 +1,6 @@
-@(invoiceNo: String, date: java.util.Date)
+@import model.Models.Record
+@import model.Models.Records
+@(invoiceNo: String, records: Records)
 
 <!doctype html>
 <html lang="en">
@@ -28,7 +30,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-5">
+        <div class="col-xs-4">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4>From: <a href="#">Your Name</a></h4>
@@ -42,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-5 col-xs-offset-2 text-right">
+        <div class="col-xs-4 col-xs-offset-3 text-right">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4>To : <a href="#">Client Name</a></h4>
@@ -78,32 +80,21 @@
             </th>
           </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <td>Article</td>
-            <td><a href="#">Title of your article here</a></td>
-            <td class="text-right">-</td>
-            <td class="text-right">$200.00</td>
-            <td class="text-right">$200.00</td>
-          </tr>
-          <tr>
-            <td>Template Design</td>
-            <td><a href="#">Details of project here</a></td>
-            <td class="text-right">10</td>
-            <td class="text-right">75.00</td>
-            <td class="text-right">$750.00</td>
-          </tr>
-          <tr>
-            <td>Development</td>
-            <td><a href="#">WordPress Blogging theme</a></td>
-            <td class="text-right">5</td>
-            <td class="text-right">50.00</td>
-            <td class="text-right">$250.00</td>
-          </tr>
+          @for(r <- records.records) {
+            <tr>
+              <td>@r.service</td>
+              <td>@r.description</td>
+              <td class="text-right">@r.quantity</td>
+              <td class="text-right">$@r.price</td>
+              <td class="text-right">$@r.total</td>
+            </tr>
+          }
         </tbody>
       </table>
       <div class="row text-right">
-        <div class="col-xs-2 col-xs-offset-8">
+        <div class="col-xs-2 col-xs-offset-6">
           <p>
             <strong>
             Sub Total : <br>
